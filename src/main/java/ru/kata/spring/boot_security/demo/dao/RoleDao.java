@@ -10,11 +10,6 @@ public interface RoleDao {
 
     public Role getRoleByName(String name);
 
-    public HashSet<Role> getSetOfRoles(String[] roleNames);
-
     public void add(Role role);
 
-    public void edit(Role role);
-
-    public Role getById(int id);
 }

@@ -31,24 +31,11 @@ public class RoleServiceImpl implements RoleService{
         return roleDao.getRoleByName(name);
     }
 
-    @Override
-    public HashSet<Role> getSetOfRoles(String[] roleNames) {
-        return roleDao.getSetOfRoles(roleNames);
-    }
 
     @Override
     public void add(Role role) {
         roleDao.add(role);
     }
 
-    @Override
-    public void edit(Role role) {
-        roleDao.edit(role);
-    }
-
-    @Override
-    public Role getById(int id) {
-        return roleDao.getById(id);
-    }
 }
 

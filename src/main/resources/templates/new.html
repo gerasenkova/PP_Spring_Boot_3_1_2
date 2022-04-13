@@ -23,6 +23,16 @@
     <label for="name">Enter email: </label>
     <input type="text" th:field="*{email}" id="email">
     <br>
+    <br>
+    <select th:field="*{roles}" multiple size="2">
+        <option th:each="role:${roles}"
+                th:value="${role.id}"
+                th:text="${role.getName()}"></option>
+    </select>
+    <!--        <tr th:each="role : ${roles}">-->
+    <!--            <label><input type="checkbox" name="${roles}" th:text="${role}"></label><br>-->
+    <!--        </tr>-->
+    <br>
     <input type="submit" value="Create!"/>
 </form>
 </body>

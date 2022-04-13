@@ -29,26 +29,7 @@ public class RoleDaoImpl implements RoleDao {
     }
 
     @Override
-    public HashSet<Role> getSetOfRoles(String[] roleNames) {
-        Set<Role> roleSet = new HashSet<>();
-        for (String role : roleNames) {
-            roleSet.add(getRoleByName(role));
-        }
-        return (HashSet) roleSet;
-    }
-
-    @Override
     public void add(Role role) {
         entityManager.persist(role);
-    }
-
-    @Override
-    public void edit(Role role) {
-        entityManager.merge(role);
-    }
-
-    @Override
-    public Role getById(int id) {
-        return entityManager.find(Role.class, id);
     }
 }
