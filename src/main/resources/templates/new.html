@@ -5,9 +5,10 @@
     <title>New User</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/admin/}" th:object="${user}">
+<form th:method="POST" th:action="@{/admin}" th:object="${user}">
     <label for="name">Enter name: </label>
     <input type="text" th:field="*{name}" id="name">
+    <br>
     <br>
     <label for="name">Enter last name: </label>
     <input type="text" th:field="*{lastName}" id="lastName">
@@ -20,18 +21,19 @@
     <label for="password">Enter password: </label>
     <input type="text" th:field="*{password}" id="password">
     <br>
+    <br>
     <label for="name">Enter email: </label>
     <input type="text" th:field="*{email}" id="email">
     <br>
     <br>
     <select th:field="*{roles}" multiple size="2">
-        <option th:each="role:${roles}"
-                th:value="${role.id}"
-                th:text="${role.getName()}"></option>
+        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.getName()}">
+        </option>
     </select>
-    <!--        <tr th:each="role : ${roles}">-->
-    <!--            <label><input type="checkbox" name="${roles}" th:text="${role}"></label><br>-->
-    <!--        </tr>-->
+<!--            <tr th:each="role : ${roles}">-->
+<!--                <label><input type="checkbox" name="${roles}" th:text="${role}"></label><br>-->
+<!--            </tr>-->
+    <br>
     <br>
     <input type="submit" value="Create!"/>
 </form>

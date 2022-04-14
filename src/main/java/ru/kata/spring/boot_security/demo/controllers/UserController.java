@@ -21,8 +21,8 @@ public class UserController {
     }
     @GetMapping
     public String getUser(@AuthenticationPrincipal User user, Model model) {
-        model.addAttribute("user", userService.findByUsername(user.getUsername()));
-        model.addAttribute("roles", userService.findByUsername(user.getUsername()).getRoles());
+        model.addAttribute("user", userService.findByEmail(user.getUsername()));
+        model.addAttribute("roles", userService.findByEmail(user.getUsername()).getRoles());
         return "index";
     }
 }

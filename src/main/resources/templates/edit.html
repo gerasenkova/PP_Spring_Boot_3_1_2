@@ -24,11 +24,12 @@
     <label for="name">Enter email: </label>
     <input type="text" th:field="*{email}" id="email">
     <br>
-<!--    <select th:field="*{roles}" multiple size="2">-->
-<!--        <option th:each="role:${roles}"-->
-<!--                th:value="${role.id}"-->
-<!--                th:text="${role.getName()}"></option>-->
-<!--    </select>-->
+    <select th:field="*{roles}" multiple size="2">
+        <option th:each="role:${roles}"
+                th:value="${role.id}"
+                th:text="${role.getName()}"></option>
+    </select>
+
     <input type="submit" value="update"/>
 </form>
 

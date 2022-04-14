@@ -11,6 +11,10 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashSet;
+import java.util.Set;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -24,9 +28,9 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public String printUsers(@AuthenticationPrincipal org.springframework.security.core.userdetails.User user, Model model) {
-        model.addAttribute("user", userService.findByUsername(user.getUsername()));
+        model.addAttribute("user", userService.findByEmail(user.getUsername()));
         model.addAttribute("users", userService.userList());
         return "user";
     }
@@ -38,16 +42,17 @@ public class AdminController {
         return "/new";
     }
 
+
     @PostMapping()
     public String addUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
-        return "redirect:/admin/";
+        return "redirect:/admin";
     }
 
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable("id") int id) {
         userService.delete(id);
-        return "redirect:/admin/";
+        return "redirect:/admin";
     }
 
     @GetMapping("/{id}/edit")
@@ -61,7 +66,7 @@ public class AdminController {
     public String update(@ModelAttribute("user") User user,
                          @PathVariable("id") int id) {
         userService.updateUser(user);
-        return "redirect:/admin/";
+        return "redirect:/admin";
     }
 }
 
