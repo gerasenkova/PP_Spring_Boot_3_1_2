@@ -44,13 +44,13 @@ public class AdminController {
 
     @PostMapping()
     public String createUser(@ModelAttribute("newUser") User user, HttpServletRequest request) {
-        Set<Role> roles = new HashSet<>();
-        String[] userRoles = request.getParameterValues("role1");
-        for (String roleId : userRoles) {
-            if (Long.parseLong(roleId) == 2L) {
+        Set <Role> roles=new HashSet<>();
+        String[] userRoles=request.getParameterValues("role1");
+        for(String roleId : userRoles){
+            if(Long.parseLong(roleId)==2L){
                 roles.add(roleService.getRoleById(2L));
             }
-            if (Long.parseLong(roleId) == 1L) {
+            if(Long.parseLong(roleId)==1L){
                 roles.add(roleService.getRoleById(1L));
             }
         }
