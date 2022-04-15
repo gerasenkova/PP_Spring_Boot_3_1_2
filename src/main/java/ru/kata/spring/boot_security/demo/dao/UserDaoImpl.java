@@ -15,13 +15,6 @@ public class UserDaoImpl implements UserDao {
     private EntityManager entityManager;
 
 
-
-    @Override
-    public User findByEmail(String email) {
-        return entityManager.createQuery("select u from User u where u.email=:email", User.class)
-                .setParameter("email", email).getSingleResult();
-    }
-
     @Override
     public List<User> userList() {
         return entityManager.createQuery("select u from User u", User.class).getResultList();
@@ -46,5 +39,11 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getById(long id) {
         return entityManager.find(User.class, id);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return entityManager.createQuery("select u from User u where u.email=:email", User.class)
+                .setParameter("email", email).getSingleResult();
     }
 }
