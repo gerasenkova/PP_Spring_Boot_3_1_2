@@ -26,13 +26,20 @@
     <input type="text" th:field="*{email}" id="email">
     <br>
     <br>
-    <select th:field="*{roles}" multiple size="2">
-        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.getName()}">
-        </option>
+    <label for="Role 1"> Role 1: </label>
+    <select name="role1" id="Role 1">
+        <option value="0"></option>
+        <option value="1">ROLE_USER</option>
+        <option value="2">ROLE_ADMIN</option>
     </select>
-<!--            <tr th:each="role : ${roles}">-->
-<!--                <label><input type="checkbox" name="${roles}" th:text="${role}"></label><br>-->
-<!--            </tr>-->
+    <label for="Role 2"> Role 1: </label>
+    <select name="role1" id="Role 2">
+        <option value="0"></option>
+        <option value="1">ROLE_USER</option>
+        <option value="2">ROLE_ADMIN</option>
+    </select>
+
+
     <br>
     <br>
     <input type="submit" value="Create!"/>

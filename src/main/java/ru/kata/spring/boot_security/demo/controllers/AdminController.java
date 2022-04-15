@@ -42,21 +42,33 @@ public class AdminController {
         return "/new";
     }
 
-
     @PostMapping()
-    public String addUser(@ModelAttribute("user") User user) {
+    public String createUser(@ModelAttribute("newUser") User user, HttpServletRequest request) {
+        Set<Role> roles = new HashSet<>();
+        String[] userRoles = request.getParameterValues("role1");
+        for (String roleId : userRoles) {
+            if (Long.parseLong(roleId) == 2L) {
+                roles.add(roleService.getRoleById(2L));
+            }
+            if (Long.parseLong(roleId) == 1L) {
+                roles.add(roleService.getRoleById(1L));
+            }
+        }
+        user.setRoles(roles);
         userService.saveUser(user);
         return "redirect:/admin";
     }
 
+
+
     @GetMapping("/{id}/delete")
-    public String delete(@PathVariable("id") int id) {
+    public String delete(@PathVariable("id") Long id) {
         userService.delete(id);
         return "redirect:/admin";
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(ModelMap model, @PathVariable("id") int id) {
+    public String edit(ModelMap model, @PathVariable("id") Long id) {
         model.addAttribute("roles", roleService.getAllRoles());
         model.addAttribute("user", userService.getById(id));
         return "edit";
@@ -64,7 +76,18 @@ public class AdminController {
 
     @PostMapping("/{id}")
     public String update(@ModelAttribute("user") User user,
-                         @PathVariable("id") int id) {
+                         @PathVariable("id") Long id, HttpServletRequest request) {
+        Set <Role> roles=new HashSet<>();
+        String[] userRoles=request.getParameterValues("role1");
+        for(String roleId : userRoles){
+            if(Long.parseLong(roleId)==2L){
+                roles.add(roleService.getRoleById(2L));
+            }
+            if(Long.parseLong(roleId)==1L){
+                roles.add(roleService.getRoleById(1L));
+            }
+        }
+        user.setRoles(roles);
         userService.updateUser(user);
         return "redirect:/admin";
     }

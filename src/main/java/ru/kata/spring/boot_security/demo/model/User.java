@@ -22,13 +22,13 @@ public class User implements UserDetails {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column
+    @Column(unique = true)
     private String username;
 
     @Column
     private String password;
 
-    @Column(name = "email")
+    @Column(unique = true)
     private String email;
 
     @ManyToMany(fetch = FetchType.LAZY)
