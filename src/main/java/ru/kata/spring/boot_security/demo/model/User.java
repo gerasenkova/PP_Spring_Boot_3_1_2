@@ -30,6 +30,8 @@ public class User implements UserDetails {
 
     @Column(unique = true)
     private String email;
+    @Column
+    private int age;
 
     @ManyToMany(fetch = FetchType.LAZY)//выводим роли только при вызове, ленивая загрузка
     @JoinTable(name = "users_role",
@@ -49,6 +51,14 @@ public class User implements UserDetails {
         this.password = password;
         this.email = email;
         this.roles = roles;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getName() {
