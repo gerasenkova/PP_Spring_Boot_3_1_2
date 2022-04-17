@@ -62,16 +62,18 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+
     @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("roles", roleService.getAllRoles());
+    public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("user", userService.getById(id));
-        return "edit";
+        model.addAttribute("roles", roleService.getAllRoles());
+        return "/edit";
     }
 
-    @PostMapping("/{id}")
+
+    @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") User user,
-                         @PathVariable Long id, @RequestParam(value = "editRole") String [] roles1) {
+                         @RequestParam (value = "editRole") String[]roles1) {
         Set<Role> roles=new HashSet<>();
         for(String role:roles1){
             roles.add(roleService.getRoleByName(role));
