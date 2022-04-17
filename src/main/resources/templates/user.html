@@ -1,36 +1,35 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Spring Security Example</title>
+  <title>Spring Security Example</title>
 </head>
 <body>
-<h1>User, welcome spring boot security page!</h1>
-<div>
-    <table border="1">
-        <tr>
-            <th>Name</th>
-            <th>Last name</th>
-            <th>Email</th>
-            <th>Actions</th>
-        </tr>
-        <tr th:each="user : ${users}">
-            <th th:text="${user.getName()}"></th>
-            <th th:text="${user.getLastName()}"></th>
-            <th th:text="${user.getEmail()}"></th>
+<h1>Welcome to Index PAGE!</h1>
 
-            <td>
-                <a th:href="@{/admin/{id}/edit(id=${user.getId()})}">Edit</a>
-                <a th:href="@{/admin/{id}/delete(id=${user.getId()})}">Delete</a>
-            </td>
+<div th:object="${user}">
+  <p>
+    <code>Hello</code>
+    <code th:text="${user.getName()}"></code>
+    <code th:text="${user.getLastName()}"></code>
+    <code>!</code>
+  </p>
+  <p>
+    <code>Your email is:</code>
+    <code th:text="${user.getEmail()}"></code>
+  </p>
 
-        </tr>
-    </table>
-    </br>
-    </br>
-    </hr>
-    <a th:href="@{/admin/new/}">Create new user</a>
-
+  <code>Your roles are</code>
+  <code th:each="role:${roles}"  th:text="${user.getRoles()}"></code>
 </div>
+
+<br>
+
 <div th:insert="~{exit :: exit_button}"></div>
+<div sec:authorize="hasRole('ADMIN')">
+  <form action="/admin/" method="GET">
+    <button type="submit">All users</button>
+  </form>
+</div>
+
 </body>
 </html>

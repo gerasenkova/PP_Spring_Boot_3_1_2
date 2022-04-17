@@ -11,7 +11,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
-import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,10 +29,11 @@ public class AdminController {
     }
 
     @GetMapping
-    public String printUsers(@AuthenticationPrincipal org.springframework.security.core.userdetails.User user, Model model) {
-        model.addAttribute("user", userService.findByEmail(user.getUsername()));
+    public String allUsers(Principal principal, Model model) {
+        User user = userService.findByEmail(principal.getName());
+        model.addAttribute("user", user);
         model.addAttribute("users", userService.userList());
-        return "user";
+        return "admin";
     }
 
     @GetMapping("/new")
@@ -62,7 +63,7 @@ public class AdminController {
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(ModelMap model, @PathVariable("id") Long id) {
+    public String edit(Model model, @PathVariable("id") Long id) {
         model.addAttribute("roles", roleService.getAllRoles());
         model.addAttribute("user", userService.getById(id));
         return "edit";
@@ -70,12 +71,7 @@ public class AdminController {
 
     @PostMapping("/{id}")
     public String update(@ModelAttribute("user") User user,
-                         @RequestParam(value = "nameRoles") String[] roles) {
-        Set<Role> roles1 = new HashSet<>();
-        for (String role : roles){
-            roles1.add(roleService.getRoleByName(role));
-        }
-        user.setRoles(roles1);
+                         @PathVariable Long id) {
         userService.updateUser(user);
         return "redirect:/admin";
     }

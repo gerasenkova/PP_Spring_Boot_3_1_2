@@ -21,8 +21,11 @@
     <label for="password">Enter password: </label>
     <input type="text" th:field="*{password}" id="password">
     <br>
-    <label for="name">Enter email: </label>
+    <label for="email">Enter email: </label>
     <input type="text" th:field="*{email}" id="email">
+    <br>
+    <label for="age">Enter age: </label>
+    <input type="text" th:field="*{age}" id="age">
     <br>
     <select size="2" name="nameRoles" multiple>
         <option th:each="role : ${roles}"
@@ -34,8 +37,6 @@
     <br>
     <input type="submit" value="update"/>
 </form>
-
-
 </body>
 <div th:insert="~{exit :: exit_button}"></div>
 </html>
